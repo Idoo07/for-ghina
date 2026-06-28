@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday ❤️</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+overflow-x:hidden;
+overflow-y:auto;
+min-height:100vh;
+background:linear-gradient(135deg,#ffb6c1,#ffc0cb,#ffd6e7);
+color:white;
+}
+
+.screen{
+position:absolute;
+left:0;
+top:0;
+width:100%;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:20px;
+text-align:center;
+transition:0.7s;
+overflow-x:hidden;
+}
+
+.hidden{
+opacity:0;
+pointer-events:none;
+transform:scale(.9);
+}
+
+h1{
+margin-bottom:20px;
+text-shadow:0 3px 10px rgba(0,0,0,.2);
+}
+
+button{
+border:none;
+padding:14px 25px;
+margin:8px;
+border-radius:50px;
+background:white;
+color:#ff4d88;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+transition:.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+.cake{
+font-size:90px;
+margin-bottom:20px;
+animation:float 2s infinite;
+}
+
+.gift{
+font-size:130px;
+cursor:pointer;
+animation:bounce 1.2s infinite;
+}
+
+.letter{
+font-size:120px;
+cursor:pointer;
+animation:float 2s infinite;
+}
+
+.message-box{
+background:rgba(255,255,255,.2);
+backdrop-filter:blur(8px);
+padding:25px;
+border-radius:20px;
+max-width:700px;
+width:100%;
+box-shadow:0 5px 20px rgba(0,0,0,.15);
+}
+
+#typed{
+line-height:1.8;
+font-size:18px;
+white-space:pre-line;
+}
+
+
+.flower{
+position:absolute;
+top:-50px;
+font-size:25px;
+animation:fall linear infinite;
+}
+
+.heart{
+position:absolute;
+bottom:-50px;
+font-size:20px;
+animation:up linear infinite;
+} 
+
+#screen5{
+position:relative;
+overflow-y:auto;
+max-height:100vh;
+justify-content:flex-start;
+}
+
+@keyframes fall{
+to{
+transform:translateY(120vh) rotate(360deg);
+}
+}
+
+@keyframes up{
+to{
+transform:translateY(-120vh);
+}
+}
+
+@keyframes bounce{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-15px);}
+}
+
+@keyframes float{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-10px);}
+}
+
+.small{
+font-size:20px;
+margin-bottom:20px;
+}
+
+.music-btn{
+position:fixed;
+top:15px;
+right:15px;
+z-index:999;
+} 
+
+html,
+body{
+width:100%;
+max-width:100%;
+overflow-x:hidden;
+}
+</style>
+</head>
+<body>
+
+<!-- GANTI FILE MP3 DI SINI -->
+<audio id="music" loop>
+<source src="sampaijadidebu.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-btn" onclick="playMusic()">
+🎵 Putar Lagu
+</button>
+
+<div id="flowers"></div>
+<div id="hearts"></div>
+
+<!-- SCREEN 1 -->
+<div class="screen" id="screen1">
+
+<div class="cake">🎂</div>
+
+<h1>
+tebakk siapa orang yang paling menggemaskan yang lagi ultah hari iniiii?
+</h1>
+
+<button onclick="nextQuestion()">
+💕 Ginaa
+</button>
+
+<button onclick="nextQuestion()">
+💖 Kesayangan Idoo
+</button>
+
+<button onclick="nextQuestion()">
+👑 Princess
+</button>
+
+</div>
+
+<!-- SCREEN 2 -->
+<div class="screen hidden" id="screen2">
+
+<h1>hahahahaa semuanya benerr cintaaa 😘</h1>
+
+<button onclick="showGift()">
+🎁 kado ape nii
+</button>
+
+</div>
+
+<!-- SCREEN 3 -->
+<div class="screen hidden" id="screen3">
+
+<div class="small">
+Klik kadonya yaa 💝
+</div>
+
+<div class="gift" onclick="openGift()">
+🎁
+</div>
+
+</div>
+
+<!-- SCREEN 4 -->
+<div class="screen hidden" id="screen4">
+
+<h1>duarrr kadonya kebukaaa!!! ✨</h1>
+
+<div class="small">
+Ada surat spesial buat kamu, ohh iya jangan lupa dipencet lagunya yaa 💌
+</div>
+
+<div class="letter" onclick="openLetter()">
+💌
+</div>
+
+</div>
+
+<!-- SCREEN 5 -->
+<div class="screen hidden" id="screen5">
+
+
+<div class="message-box">
+
+<h1>
+🎂 Selamat Ulang Tahun Sayangg ❤️
+</h1>
+
+<p id="typed"></p>
+
+</div>
+
+</div>
+
+<script>
+
+function hideAll(){
+document.querySelectorAll('.screen').forEach(el=>{
+el.classList.add('hidden');
+});
+}
+
+function nextQuestion(){
+hideAll();
+document.getElementById('screen2').classList.remove('hidden');
+}
+
+function showGift(){
+hideAll();
+document.getElementById('screen3').classList.remove('hidden');
+}
+
+function openGift(){
+hideAll();
+document.getElementById('screen4').classList.remove('hidden');
+}
+
+function openLetter(){
+hideAll();
+document.getElementById('screen5').classList.remove('hidden');
+typeWriter();
+}
+
+function playMusic(){
+document.getElementById('music').play();
+}
+
+const text = `
+
+MWAHHH ❤️
+
+
+Selamat ulang tahun cintaa... Ghina Rahimah, atau ginaa yang selalu malu kalo disebut namanya hahahaa, akuu cumaa mau nyampein sedikitt ucapan selamat ke kamu, tepatnya hari ini tanggal 01 Juli 2026, tanggal lahir seorang princess yang sekarang lagi sama aku menjadi pasangan yang selalu akuu banggain, ngangenin, sayangg bangettttttt wahahhaa. balik ke topik, aku cuma mau ucapin selamat ulang tahun yaaa sayangg, semoga kamu selalu gembira hari hari nya, panjang umurnyaa, sehatt selalu, semuaa yang terbaik lahh buat kamuu aku doainn, akuu selalu usahain yang terbaik buat kamu walaupun kadang aku bikin kacau semuanya, akuu bakall teruss mengupgrade diri kokk mwhehee
+
+ohh iyaa, maafff yaa aku cuma bisa ucapin dengan inii.. aku buat ini pas kita lagi voice bareng, dan pas aku lagi mikirin kamu, aku ngetik inii juga pas kamu lagi bertanya tanya, sebenernya apa yang lagi aku bikin dengan kata "project itu" hahahaaa, maaf yaaa bikin penasaran.
+
+ohh yaa, akuu cumaa bisa minta maaf dan berterima kasih sama kamu udaa ada di hidup aku, maafin aku yaa dengan kekurangan ku, aku yakin kok kalo aku bilang langsung kaya gini ke kamu, kamu bakal marahh. akuu cuma mau minta maaff kaloo aku selalu bikin kamu kesel, bikin kamu hilang mood nyaa pas lagi happy happy nya, maaff juga kalo aku ga selalu sesuai sama keinginan kamuu. akuu cumaa bisa minta maaf dann ngulangin hal yang sama, nyatanya gitu tapii aku usahaa kokkk biar gaa ngulangin hal yang sama.
+
+kepanjangan sihh inii sebenernyaa masih banyak yang bisa aku ketik cuma otak ku kapasitas nya cuma 2mb, inget satu detik lupa, inget lupa inget lupa hahahhaa
+
+intinyaa makasii yaa sayangg kamu udaa nerimaa aku yang seadanyaa inii, good luck buat kamu aku selaluu doainn yang terbaikk buat kamuu. akuu cuma bisa ucapin gini di website sederhana yang aku buatt sendiri, project yang ku bilang bakal kita ber 2 yang tau, agak alay sih kalo dibilangg project hahaa. sokk kerenn dikit bilang project. udahh sihh gitu ajaa lopyuuuuuuuuu ❤️
+
+gatau ini isi kata kata nya nyambung apa engga, gaa pinter nyusun kata kata, intinya makasi ya udaa hadir di hidup aku, makasi juga ya bisa bikin hari hari ku berwarna. entah lewat hal kecil, candaan random, aku bersyukur banget bisa jadi bagian dari cerita hidup kamuu  dan hadir di hidup kamu. makasi udaa mau lewatin hari hari yang menguras tenaga buat kamu, menguras pikiran, bahkan bikin kamu sedih pada saat kamu ingin bersenang senang sama aku... aku nyicil bikin kata kata ini saat aku lagi ngerasain bahagia atau bahkan lagi sedih. aku tau sekedar ucapan ini ga seberapa, engga kaya orang orang diluar sana yang lebih effort, aku cuma mau nunjukin effort dari caraku sendiri. makasi yaa udaa lahirr di dunia inii..
+
+
+AKUU SAYANGG KAMUUUU❤️
+ 
+`;
+
+let i = 0;
+
+function typeWriter(){
+
+const target = document.getElementById("typed");
+
+if(i < text.length){
+target.innerHTML += text.charAt(i);
+i++;
+setTimeout(typeWriter,15);
+}
+
+}
+
+function createFlower(){
+
+const flower=document.createElement("div");
+
+flower.className="flower";
+
+const arr=["🌸","🌷","🌹"];
+
+flower.innerHTML=arr[Math.floor(Math.random()*arr.length)];
+
+flower.style.left=Math.random()*95+"vw";
+
+flower.style.animationDuration=
+(Math.random()*5+5)+"s";
+
+document.body.appendChild(flower);
+
+setTimeout(()=>{
+flower.remove();
+},10000);
+
+}
+
+setInterval(createFlower,500);
+
+function createHeart(){
+
+const heart=document.createElement("div");
+
+heart.className="heart";
+
+heart.innerHTML="❤️";
+
+heart.style.left=Math.random()*95+"vw";
+
+heart.style.animationDuration=
+(Math.random()*4+4)+"s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},9000);
+
+}
+
+setInterval(createHeart,800);
+
+</script>
+
+</body>
+</html>
